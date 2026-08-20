@@ -120,14 +120,18 @@ func Load(path string) (*MiningResult, error) {
 	content := string(raw)
 	jsonData, checksum, err := splitChecksum(content)
 	if err != nil {
-		return nil, err
+		jsonData, checksum, err = finalizeLoadError(content, checksum, err)
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	// verify checksum
-	sum := sha256.Sum256([]byte(jsonData))
-	computed := hex.EncodeToString(sum[:])
-	if computed != checksum {
-		return nil, ErrCorrupt
+	if checksum != "" {
+		sum := sha256.Sum256([]byte(jsonData))
+		computed := hex.EncodeToString(sum[:])
+		if computed != checksum {
+			return nil, ErrCorrupt
+		}
 	}
 
 	var result MiningResult
