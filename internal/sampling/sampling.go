@@ -75,7 +75,7 @@ func RandomSampleWithoutReplacement(txs []Transaction, n int, seed uint64) []Tra
 	}
 	sample := make([]Transaction, n)
 	for i := 0; i < n; i++ {
-		sample[i] = txs[indices[i]]
+		sample[i] = txs[drawIndex(indices, i)]
 	}
 	return sample
 }
