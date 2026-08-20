@@ -197,7 +197,7 @@ func GenerateRules(freq []FrequentSet, total int, minConfidence float64) []Rule 
 					cons = append(cons, fs.Items[i])
 				}
 			}
-			antCount := countOf[key(ant)]
+			antCount := antecedentSupport(countOf, ant)
 			if antCount == 0 {
 				continue
 			}
