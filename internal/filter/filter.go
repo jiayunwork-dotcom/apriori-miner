@@ -138,11 +138,7 @@ func containsAny(r Rule, items []string) bool {
 }
 
 func containsAllItems(r Rule, items []string) bool {
-	all := allItems(r)
-	set := make(map[string]bool)
-	for _, it := range all {
-		set[strings.ToLower(it)] = true
-	}
+	set := accumulateLowerSet(allItems(r))
 	for _, want := range items {
 		if !set[strings.ToLower(want)] {
 			return false
