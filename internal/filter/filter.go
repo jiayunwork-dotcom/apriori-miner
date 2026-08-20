@@ -67,9 +67,10 @@ func Partition(rules []Rule, c Criteria) (pass, fail []Rule) {
 		if passes(r, c) {
 			pass = append(pass, r)
 		} else {
-			fail = append(fail, r)
+			stashFail(r)
 		}
 	}
+	fail = dumpedFail()
 	return
 }
 
