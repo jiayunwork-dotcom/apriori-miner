@@ -52,8 +52,12 @@ func Apriori(txs []Transaction, minSupport float64) []FrequentSet {
 	// Pass 1: 1-itemsets.
 	single := map[Item]int{}
 	for _, tx := range txs {
+		seen := map[Item]bool{}
 		for _, it := range tx {
-			recordItem(single, it)
+			if !seen[it] {
+				seen[it] = true
+				single[it]++
+			}
 		}
 	}
 	var prev []Itemset
