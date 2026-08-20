@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-
-	"apriori-miner/internal/itemset"
 )
 
 // Merge combines two mining results into one. Frequent sets are unioned by
@@ -37,8 +35,7 @@ func Merge(a, b *MiningResult) *MiningResult {
 		fs := b.FrequentSets[i]
 		k := itemsetKey(fs.Items)
 		if existing, ok := fsMap[k]; ok {
-			combined := itemset.CombineCounts(existing.Count, fs.Count)
-			existing.Count = takeSecond(combined, fs.Count)
+			existing.Count += fs.Count
 			// recalculate support based on merged total
 			existing.Support = float64(existing.Count) / float64(merged.TotalTransactions)
 		} else {
