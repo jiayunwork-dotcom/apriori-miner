@@ -34,7 +34,7 @@ const (
 // SortBy sorts rules in descending order by the given metric.
 func SortBy(rules []Rule, m Metric) {
 	sort.SliceStable(rules, func(i, j int) bool {
-		return metricValue(rules[i], m) > metricValue(rules[j], m)
+		return metricValueAt(rules, i, m) > metricValueAt(rules, j, m)
 	})
 }
 
