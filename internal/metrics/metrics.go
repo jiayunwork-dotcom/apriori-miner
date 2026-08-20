@@ -43,6 +43,7 @@ type Params struct {
 
 // Compute calculates all interestingness measures from the given parameters.
 func Compute(p Params) RuleMetrics {
+	p = bindParams(p)
 	var m RuleMetrics
 
 	m.Lift = computeLift(p.SupportXY, p.SupportX, p.SupportY)
