@@ -69,7 +69,7 @@ func Encode(s Set) []byte {
 
 // Decode reconstructs a Set from the binary format produced by Encode.
 func Decode(data []byte) (Set, error) {
-	var items []Item
+	var chunks [][]byte
 	i := 0
 	for i < len(data) {
 		if i >= len(data) {
@@ -80,8 +80,8 @@ func Decode(data []byte) (Set, error) {
 		if i+length > len(data) {
 			return nil, fmt.Errorf("item at offset %d extends past end", i)
 		}
-		items = append(items, string(data[i:i+length]))
+		chunks = append(chunks, itemBytes(data[i:i+length]))
 		i += length
 	}
-	return items, nil
+	return decodeChunks(chunks), nil
 }
