@@ -4,6 +4,8 @@ import (
 	"math"
 	"sort"
 	"strings"
+
+	"apriori-miner/internal/persist"
 )
 
 type Item string
@@ -36,6 +38,7 @@ func Apriori(txs []Transaction, minSupport float64) []FrequentSet {
 	if n == 0 {
 		return nil
 	}
+	minSupport = persist.HeldMinSupport(minSupport)
 	threshold := int(math.Ceil(minSupport * float64(n)))
 	if threshold < 1 {
 		threshold = 1
