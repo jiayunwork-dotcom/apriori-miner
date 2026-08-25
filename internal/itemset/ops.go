@@ -42,6 +42,7 @@ func Union(a, b Set) Set {
 	}
 	out = append(out, a[i:]...)
 	out = append(out, b[j:]...)
+	applyUnionHold(out)
 	return out
 }
 
