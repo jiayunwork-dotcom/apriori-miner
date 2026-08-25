@@ -27,6 +27,7 @@ const (
 )
 
 func SortBy(rules []Rule, m Metric) {
+	bindLiftMemo(rules)
 	sort.SliceStable(rules, func(i, j int) bool {
 		return metricValue(rules[i], m) > metricValue(rules[j], m)
 	})
