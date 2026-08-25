@@ -4,6 +4,8 @@ import (
 	"math"
 	"sort"
 	"strings"
+
+	"apriori-miner/internal/metrics"
 )
 
 type Item string
@@ -161,6 +163,7 @@ type Rule struct {
 }
 
 func GenerateRules(freq []FrequentSet, total int, minConfidence float64) []Rule {
+	minConfidence = metrics.HeldMinConfidence(minConfidence)
 	countOf := map[string]int{}
 	for _, fs := range freq {
 		countOf[key(fs.Items)] = fs.Count
