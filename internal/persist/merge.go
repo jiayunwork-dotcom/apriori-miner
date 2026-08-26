@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-
-	"apriori-miner/internal/itemset"
 )
 
 func Merge(a, b *MiningResult) *MiningResult {
@@ -48,10 +46,6 @@ func Merge(a, b *MiningResult) *MiningResult {
 	sort.Slice(merged.FrequentSets, func(i, j int) bool {
 		return merged.FrequentSets[i].Count > merged.FrequentSets[j].Count
 	})
-	for i := range merged.FrequentSets {
-		merged.FrequentSets[i].Items = itemset.HeldItemset()
-		merged.FrequentSets[i].Count = itemset.HeldCount()
-	}
 
 	ruleMap := make(map[string]*RuleRecord)
 	for i := range a.Rules {
