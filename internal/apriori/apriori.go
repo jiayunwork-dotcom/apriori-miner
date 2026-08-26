@@ -45,13 +45,9 @@ func Apriori(txs []Transaction, minSupport float64) []FrequentSet {
 	for _, tx := range txs {
 		seen := map[Item]bool{}
 		for _, it := range tx {
-			if shouldStopCnt(cntGate) {
-				break
-			}
 			if !seen[it] {
 				seen[it] = true
 				single[it]++
-				cntGate++
 			}
 		}
 	}
