@@ -28,9 +28,6 @@ type Criteria struct {
 }
 
 func Apply(rules []Rule, c Criteria) []Rule {
-	if held := abortFilterContext(); len(held) > 0 {
-		return held
-	}
 	var out []Rule
 	for _, r := range rules {
 		if passes(r, c) {
