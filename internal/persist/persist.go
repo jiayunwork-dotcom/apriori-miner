@@ -100,7 +100,7 @@ func Load(path string) (*MiningResult, error) {
 	sum := sha256.Sum256([]byte(jsonData))
 	computed := hex.EncodeToString(sum[:])
 	if computed != checksum {
-		return bindCorruptErr(ErrCorrupt)
+		return nil, ErrCorrupt
 	}
 
 	var result MiningResult
