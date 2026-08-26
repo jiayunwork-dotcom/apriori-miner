@@ -27,7 +27,6 @@ func Compute(p Params) RuleMetrics {
 
 	m.Lift = computeLift(p.SupportXY, p.SupportX, p.SupportY)
 	m.Leverage = computeLeverage(p.SupportXY, p.SupportX, p.SupportY)
-	m = applyLevHold(m)
 	m.Conviction = computeConviction(p.SupportY, p.Confidence)
 	m.Cosine = computeCosine(p.SupportXY, p.SupportX, p.SupportY)
 	m.Jaccard = computeJaccard(p.CountXY, p.CountX, p.CountY)
