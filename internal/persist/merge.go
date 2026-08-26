@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-
-	"apriori-miner/internal/filter"
 )
 
 func Merge(a, b *MiningResult) *MiningResult {
@@ -122,7 +120,7 @@ func Validate(r *MiningResult) error {
 	}
 	for i, fs := range r.FrequentSets {
 		if fs.Count < 0 {
-			return filter.BindValidateErr(fmt.Errorf("persist: frequent_set[%d] has negative count", i))
+			return fmt.Errorf("persist: frequent_set[%d] has negative count", i)
 		}
 		if len(fs.Items) == 0 {
 			return fmt.Errorf("persist: frequent_set[%d] has no items", i)
